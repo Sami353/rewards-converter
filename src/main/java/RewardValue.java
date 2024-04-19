@@ -1,42 +1,31 @@
 public class RewardValue {
-    private double cashValue;
-    private double airlineMiles;
+    private final double cashValue;
 
     public RewardValue(double cashValue) {
         this.cashValue = cashValue;
-        this.airlineMiles = convertCashToMiles(cashValue);
     }
 
-    public RewardValue(double airlineMiles, boolean isMiles) {
-        if (isMiles) {
-            this.airlineMiles = airlineMiles;
-            this.cashValue = convertMilesToCash(airlineMiles);
-        }
+    public RewardValue(int milesValue) {
+        this.cashValue = convertToCash(milesValue);
+    }
+
+    private static int convertToMiles(double cashValue) {
+        return (int) (cashValue / 0.0035);
+    }
+
+    private static double convertToCash(int milesValue) {
+        return milesValue * 0.0035;
     }
 
     public double getCashValue() {
         return cashValue;
     }
 
-    public void setCashValue(double cashValue) {
-        this.cashValue = cashValue;
+    public int getMilesValue() {
+        return convertToMiles(this.cashValue);
     }
 
-    public double getAirlineMiles() {
-        return airlineMiles;
-    }
-
-    public void setAirlineMiles(double airlineMiles) {
-        this.airlineMiles = airlineMiles;
-    }
-
-    // Conversion from cash to miles
-    public double convertCashToMiles(double cashAmount) {
-        return cashAmount * 1000; 
-    }
-
-    // Conversion from miles to cash at rate of 0.0035
-    public double convertMilesToCash(double miles) {
-        return miles * 0.0035;
+    public int getAirlineMiles() {
+        return getMilesValue(); // Assuming getAirlineMiles() should return miles value
     }
 }
