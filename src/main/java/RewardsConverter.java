@@ -12,12 +12,17 @@ public class RewardsConverter {
             cashValue = Double.parseDouble(inputValue);
         } catch (NumberFormatException e) {
             System.out.println("Could not parse input value as a double, exiting");
+            scanner.close(); // Close the scanner after use
             return;
+            
         }
+        
 
         System.out.println("Converting $" + inputValue + " to miles");
         // Create a RewardValue object with the cash value constructor
         RewardValue rewardsValue = new RewardValue(cashValue);
         System.out.println("$" + inputValue + " is worth " + rewardsValue.getAirlineMiles() + " miles");
+
+        scanner.close(); // Close the scanner after use
     }
 }
